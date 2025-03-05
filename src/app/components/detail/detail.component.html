@@ -1,1 +1,8 @@
-<p>detail works!</p>
+<div class="detalle-container" *ngIf="jugador">
+    <h2>{{ jugador.nombre }}</h2>
+    <p><strong>Equipo:</strong> {{ jugador.equipo }}</p>
+    <p><strong>Posición:</strong> {{ jugador.posicion }}</p>
+    <p><strong>Edad:</strong> {{ jugador.edad }} años</p>
+    <p><strong>Altura:</strong> {{ jugador.altura }}</p>
+    <img [src]="jugador.foto" alt="{{ jugador.nombre }}" class="jugador-imagen">
+</div>

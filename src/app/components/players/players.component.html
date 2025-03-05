@@ -1,6 +1,9 @@
 <h2>Lista de Jugadores</h2>
 <ul>
-  <li *ngFor="let jugador of jugadores">
+  <li *ngFor="let jugador of jugadores" (click)="seleccionarJugador(jugador)">
     {{ jugador.nombre }} - {{ jugador.posicion }} - {{ jugador.edad }} años
   </li>
 </ul>
+
+<!-- Mostramos el detalle solo si hay un jugador seleccionado -->
+<app-detail *ngIf="jugadorSeleccionado" [jugador]="jugadorSeleccionado"></app-detail>

@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-detail',
-  imports: [],
+  standalone: true,  //Necesario si usas Angular standalone
+  imports: [CommonModule], //Importamos CommonModule para *ngIf
   templateUrl: './detail.component.html',
-  styleUrl: './detail.component.css'
+  styleUrls: ['./detail.component.css']
 })
 export class DetailComponent {
-
+  @Input() jugador: any;
 }
