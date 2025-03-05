@@ -1,1 +1,6 @@
-<p>players works!</p>
+<h2>Lista de Jugadores</h2>
+<ul>
+  <li *ngFor="let jugador of jugadores">
+    {{ jugador.nombre }} - {{ jugador.posicion }} - {{ jugador.edad }} años
+  </li>
+</ul>
