@@ -9,9 +9,11 @@ export class JugadorFiltroPipe implements PipeTransform {
     if (!jugadores || !filtro) {
       return jugadores;
     }
+    filtro = filtro.toLowerCase();
     return jugadores.filter(jugador =>
-      jugador.nombre.toLowerCase().includes(filtro.toLowerCase()) ||
-      jugador.posicion.toLowerCase().includes(filtro.toLowerCase())
+      jugador.nombre.toLowerCase().includes(filtro) ||
+      jugador.posicion.toLowerCase().includes(filtro) ||
+      jugador.edad.toString().includes(filtro)
     );
   }
 }

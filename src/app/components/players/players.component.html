@@ -1,10 +1,8 @@
 <div class="players-container">
   <h2>Lista de Jugadores</h2>
 
-  <!-- Buscador -->
   <input type="text" [(ngModel)]="filtro" placeholder="Buscar jugador..." class="search-bar" />
 
-  <!-- Lista de jugadores -->
   <ul class="player-list">
     <li *ngFor="let jugador of jugadores | jugadorFiltro:filtro" (click)="seleccionarJugador(jugador)">
       <img [src]="jugador.foto" alt="{{ jugador.nombre }}" class="jugador-imagen">
@@ -12,6 +10,5 @@
     </li>
   </ul>
 
-  <!-- Componente de Detalle -->
   <app-detail *ngIf="jugadorSeleccionado" [jugador]="jugadorSeleccionado"></app-detail>
 </div>
