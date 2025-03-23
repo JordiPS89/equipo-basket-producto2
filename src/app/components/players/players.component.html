@@ -1,17 +1,36 @@
-<div class="players-container">
-  <h2>Lista de Jugadores</h2>
+<div class="filtros mb-3">
+  <input
+    type="text"
+    [(ngModel)]="filtroNombre"
+    placeholder="Buscar por nombre"
+    class="form-control mb-2"
+  />
 
-  <!-- Buscador -->
-  <input type="text" [(ngModel)]="filtro" placeholder="Buscar jugador..." class="search-bar" />
+  <select [(ngModel)]="filtroPosicion" class="form-control">
+    <option value="">Todas las posiciones</option>
+    <option value="Base">Base</option>
+    <option value="Alero">Alero</option>
+    <option value="Ala-Pívot">Ala-Pívot</option>
+    <option value="Pívot">Pívot</option>
+  </select>
+</div>
 
-  <!-- Lista de jugadores -->
-  <ul class="player-list">
-    <li *ngFor="let jugador of jugadores | jugadorFiltro:filtro" (click)="seleccionarJugador(jugador)">
-      <img [src]="jugador.foto" alt="{{ jugador.nombre }}" class="jugador-imagen">
-      <p>{{ jugador.nombre }} - {{ jugador.posicion }} - {{ jugador.edad }} años</p>
+<div class="jugadores-lista">
+  <ul class="list-unstyled">
+    <li
+      *ngFor="let jugador of jugadores | jugadorFiltro:filtroNombre:filtroPosicion"
+      (click)="seleccionarJugador(jugador)"
+      class="jugador-item d-flex align-items-center mb-2"
+      style="cursor: pointer"
+    >
+      <img
+        [src]="jugador.foto"
+        alt="{{ jugador.nombre }}"
+        class="rounded-circle me-2"
+        width="50"
+        height="50"
+      />
+      {{ jugador.nombre }} - {{ jugador.posicion }} - {{ jugador.edad }} años
     </li>
   </ul>
-
-  <!-- Componente de Detalle -->
-  <app-detail *ngIf="jugadorSeleccionado" [jugador]="jugadorSeleccionado"></app-detail>
 </div>
