@@ -1,14 +1,32 @@
-<div class="players-container">
-  <h2>Lista de Jugadores</h2>
+<div class="container justify-content-center pb-32">
+  <h3 class = "h3-title">Lista de Jugadores</h3>
 
   <input type="text" [(ngModel)]="filtro" placeholder="Buscar jugador..." class="search-bar" />
 
-  <ul class="player-list">
-    <li *ngFor="let jugador of jugadores | jugadorFiltro:filtro" (click)="seleccionarJugador(jugador)">
-      <img [src]="jugador.foto" alt="{{ jugador.nombre }}" class="jugador-imagen">
-      <p>{{ jugador.nombre }} - {{ jugador.posicion }} - {{ jugador.edad }} años</p>
-    </li>
-  </ul>
+  <div class="container mt-4">
+    <div class="row">
+      <p class="grid-title">Jugadores</p>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let jugador of jugadores">
+        <div class="card player-card" (click)="seleccionarJugador(jugador)">
+          <div class="row g-0" >
+            <div class="col-4">
+              <img [src]="jugador.foto" class="img-fluid rounded-start jugador-img" [alt]="jugador.nombre">
+            </div>
+            <div class="col-8">
+              <div class="card-body">
+                <h6 class="card-title">{{ jugador.nombre }} {{ jugador.apellidos }}</h6>
+                <p class="card-text"><strong>Equipo:</strong> {{ jugador.equipo }}</p>
+                <p class="card-text"><strong>Posición:</strong> {{ jugador.posicion }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
 
   <app-detail *ngIf="jugadorSeleccionado" [jugador]="jugadorSeleccionado"></app-detail>
 </div>

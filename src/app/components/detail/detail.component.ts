@@ -11,4 +11,12 @@ import { MediaComponent } from '../media/media.component';
 })
 export class DetailComponent {
   @Input() jugador: any;
+  // Método para llamar al método cerrarModal del componente Player
+  cerrarModal() {
+    this.jugador = null;
+  }
+
+
+
 }
+

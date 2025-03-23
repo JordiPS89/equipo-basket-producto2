@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DetailComponent } from '../detail/detail.component';
 import { FormsModule } from '@angular/forms';
@@ -16,8 +16,11 @@ export class PlayersComponent {
   filtro: string = '';
   jugadores = JUGADORES;
   jugadorSeleccionado: any = null;
-
   seleccionarJugador(jugador: any) {
     this.jugadorSeleccionado = jugador;
   }
+
+
+
+  
 }
