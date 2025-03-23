@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent {
-  @Input() jugador: any; // ← Agregar esto
+  @Input() jugador: any;
 }
