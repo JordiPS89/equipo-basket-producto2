@@ -5,15 +5,27 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true
 })
 export class JugadorFiltroPipe implements PipeTransform {
-  transform(jugadores: any[], filtro: string): any[] {
-    if (!jugadores || !filtro) {
+  transform(jugadores: any[], filtroName: string,filtroEdad: string, filtroPosicion: string): any[] {
+    if (!jugadores) {
       return jugadores;
     }
-    filtro = filtro.toLowerCase();
-    return jugadores.filter(jugador =>
-      jugador.nombre.toLowerCase().includes(filtro) ||
-      jugador.posicion.toLowerCase().includes(filtro) ||
-      jugador.edad.toString().includes(filtro)
-    );
+    let resultados = jugadores;
+    if(filtroName != ''){
+      filtroName = filtroName.toLowerCase();
+      resultados= resultados.filter(jugador =>
+        jugador.nombre.toLowerCase().includes(filtroName));
+    }
+    if(filtroEdad != ''){
+      filtroEdad = filtroEdad.toLowerCase();
+      resultados= resultados.filter(jugador =>
+        jugador.edad.toString().includes(filtroEdad));
+    }
+    if(filtroPosicion != ''){
+      filtroPosicion = filtroPosicion.toLowerCase();
+      resultados= resultados.filter(jugador =>
+        jugador.posicion.toLowerCase().includes(filtroPosicion));
+    }
+
+    return resultados;
   }
 }

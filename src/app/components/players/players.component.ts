@@ -13,12 +13,16 @@ import { JugadorFiltroPipe } from '../../pipes/jugador-filtro.pipe';
   styleUrls: ['./players.component.css']
 })
 export class PlayersComponent {
-  filtro: string = '';
+  filtroNombre: string = '';
+  filtroEdad: string = '';
+  filtroPosicion: string = '';
+
   jugadores = JUGADORES;
   jugadorSeleccionado: any = null;
   seleccionarJugador(jugador: any) {
     this.jugadorSeleccionado = jugador;
   }
+
 
 
 
