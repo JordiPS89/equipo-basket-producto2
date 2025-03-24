@@ -5,3 +5,10 @@ iframe {
   border-radius: .5em;
   display: block;
 }
+.media-container {
+  height: auto;
+  width: 100%;
+  max-width: 12em;
+  margin: 0 auto;
+  border-radius: .5em;
+}

@@ -9,8 +9,8 @@
           <div>
             <img [src]="jugador.foto" class="img-fluid" alt="{{ jugador.nombre }}">
           </div>
-          <div *ngIf="jugador.youtube">
-            <app-media [youtubeUrl]="jugador.youtube"></app-media>
+          <div *ngIf="jugador.video">
+            <app-media [videoUrl]="jugador.video"></app-media>
           </div>
         </div>
         <div class = "modal-text">

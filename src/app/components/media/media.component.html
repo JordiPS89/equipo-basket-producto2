@@ -1,4 +1,7 @@
-<!-- Video de YouTube -->
-<iframe *ngIf="youtubeUrl" width="560" height="315" [src]="youtubeUrl | safeUrl" frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-</iframe>
+<div *ngIf="videoUrl" class="media-container mt-3">
+    <video width="100%" height="auto" controls>
+      <source [src]="videoUrl" type="video/mp4" />
+      Tu navegador no soporta la reproducción de vídeo.
+    </video>
+  </div>
+  

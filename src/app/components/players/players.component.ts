@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DetailComponent } from '../detail/detail.component';
 import { FormsModule } from '@angular/forms';
 import { JUGADORES } from '../../data/jugadores';
 import { JugadorFiltroPipe } from '../../pipes/jugador-filtro.pipe';
+import { DetailComponent } from '../detail/detail.component';
 
 @Component({
   selector: 'app-players',

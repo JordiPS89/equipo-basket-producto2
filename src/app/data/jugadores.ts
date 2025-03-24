@@ -8,7 +8,7 @@ export const JUGADORES = [
     altura: '2.06m',
     equipo: 'Los Angeles Lakers',
     foto: 'assets/jugadores/lebron.jpg',
-    youtube: 'https://www.youtube.com/embed/b117a8_jALE'
+    video: 'assets/videos/lebron.mp4'
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ export const JUGADORES = [
     altura: '1.88m',
     equipo: 'Golden State Warriors',
     foto: 'assets/jugadores/curry.jpg',
-    youtube: 'https://www.youtube.com/embed/NHhTMh0nURA'
+    video: 'assets/videos/curry.mp4'
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ export const JUGADORES = [
     altura: '2.08m',
     equipo: 'Phoenix Suns',
     foto: 'assets/jugadores/durant.jpg',
-    youtube: 'https://www.youtube.com/embed/-ikmc0D31x4'
+    video: 'assets/videos/durant.mp4'
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ export const JUGADORES = [
     altura: '2.11m',
     equipo: 'Milwaukee Bucks',
     foto: 'assets/jugadores/giannis.jpg',
-    youtube: 'https://www.youtube.com/embed/H0lvVOFt7-A'
+    video: 'assets/videos/giannis.mp4'
   },
   {
     id: 5,
@@ -52,6 +52,6 @@ export const JUGADORES = [
     altura: '2.11m',
     equipo: 'Denver Nuggets',
     foto: 'assets/jugadores/jokic.jpg',
-    youtube: 'https://www.youtube.com/embed/7A-QGpW2GnA'
+    video: 'assets/videos/jokic.mp4'
   }
 ];
