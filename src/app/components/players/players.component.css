@@ -1,0 +1,61 @@
+
+  
+  .search-bar {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .player-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .player-list li {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+
+
+  .player-card {
+    width: 100%;
+    max-width: 20em; /* Tamaño fijo */
+    height: 10em; /* Altura fija */
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+  }
+  
+  .jugador-img {
+    width: 5em; /* Tamaño de la imagen */
+    height: 7em;
+    object-fit: cover;
+    border-radius: 2%;
+  }
+  
+  .card-body {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .card-title {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 3px;
+  }
+  
+  .card-text {
+    font-size: 0.7em;
+    margin-bottom: 2px;
+    color: #484545;
+  }
+
