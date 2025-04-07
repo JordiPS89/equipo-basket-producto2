@@ -1,47 +1,79 @@
-<div class="container justify-content-center pb-32">
-  <h3 class = "h3-title">Lista de Jugadores</h3>
-  <div class = "container">
-    <h4 class="buscador-title">Buscador</h4>
-    <div class="row">
-      <div class = "col">
-        <input type="text" [(ngModel)]="filtroNombre" placeholder="Nombre" class="search-bar" />
-      </div>
-      <div class = "col">
-      <input type="text" [(ngModel)]="filtroEdad"  placeholder="Edad" class="search-bar" />
-      </div>
+<div class="container mt-4">
+  <h2 class="mb-3">🏀 Lista de Jugadores</h2>
 
-      <div class = "col">
-      <input type="text" [(ngModel)]="filtroPosicion" placeholder="Posición" class="search-bar" />
-      </div>
+  <!-- FORMULARIO AÑADIR NUEVO JUGADOR -->
+  <form (ngSubmit)="addPlayer()" #playerForm="ngForm" class="mb-4 border p-3 rounded bg-light">
+    <h5>➕ Añadir jugador</h5>
 
+    <div class="mb-2">
+      <input class="form-control" placeholder="Nombre" [(ngModel)]="nuevoJugador.nombre" name="nombre" required />
+    </div>
+    <div class="mb-2">
+      <input class="form-control" placeholder="Apellidos" [(ngModel)]="nuevoJugador.apellido" name="apellido" required />
+    </div>
+    <div class="mb-2">
+      <input class="form-control" type="number" placeholder="Edad" [(ngModel)]="nuevoJugador.edad" name="edad" required />
+    </div>
+    <div class="mb-2">
+      <input class="form-control" type="number" placeholder="Altura (cm)" [(ngModel)]="nuevoJugador.altura" name="altura" required />
+    </div>
+    <div class="mb-2">
+      <input class="form-control" placeholder="Posición" [(ngModel)]="nuevoJugador.posicion" name="posicion" required />
+    </div>
+    <div class="mb-2">
+      <input class="form-control" placeholder="Equipo" [(ngModel)]="nuevoJugador.equipo" name="equipo" required />
+    </div>
+    <div class="mb-2">
+      <input class="form-control" placeholder="URL de imagen (foto)" [(ngModel)]="nuevoJugador.foto" name="foto" />
+    </div>
+    <div class="mb-2">
+      <input class="form-control" placeholder="URL de video (YouTube embed)" [(ngModel)]="nuevoJugador.video" name="video" />
     </div>
 
+    <button class="btn btn-success mt-2" [disabled]="playerForm.invalid">Guardar jugador</button>
+  </form>
+
+  <!-- MENSAJE DE CARGA -->
+  <div *ngIf="players.length === 0" class="alert alert-info">
+    Cargando jugadores...
   </div>
 
-  <div class="container mt-4">
-    <div class="row">
-      <h4 class="grid-title">Jugadores</h4>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let jugador of jugadores |jugadorFiltro :filtroNombre:filtroEdad:filtroPosicion">
-        <div class="card player-card" (click)="seleccionarJugador(jugador)">
-          <div class="row g-0" >
-            <div class="col-4">
-              <img [src]="jugador.foto" class="img-fluid rounded-start jugador-img" [alt]="jugador.nombre">
-            </div>
-            <div class="col-8">
-              <div class="card-body">
-                <h6 class="card-title">{{ jugador.nombre }} {{ jugador.apellidos }}</h6>
-                <p class="card-text"><strong>Equipo:</strong> {{ jugador.equipo }}</p>
-                <p class="card-text"><strong>Posición:</strong> {{ jugador.posicion }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+  <!-- LISTA DE JUGADORES -->
+  <div *ngFor="let player of players" class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">{{ player.nombre }} {{ player.apellido }}</h5>
+      <p class="card-text">
+        🧍 Posición: {{ player.posicion }}<br />
+        🎂 Edad: {{ player.edad }}<br />
+        📏 Altura: {{ player.altura }} cm<br />
+        🏀 Equipo: {{ player.equipo }}
+      </p>
+
+      <img *ngIf="player.foto" [src]="player.foto" width="150" class="mb-2 rounded shadow-sm" />
+
+      <div *ngIf="player.video" class="ratio ratio-16x9 mb-2">
+        <iframe [src]="player.video | safeUrl" frameborder="0" allowfullscreen></iframe>
       </div>
+
+      <button class="btn btn-primary btn-sm me-2" (click)="seleccionarJugador(player)">✏️ Editar</button>
+      <button class="btn btn-danger btn-sm" (click)="eliminarJugador(player.id)">🗑️ Eliminar</button>
     </div>
   </div>
-  
-  
-  
 
-  <app-detail *ngIf="jugadorSeleccionado" [jugador]="jugadorSeleccionado"></app-detail>
+  <!-- FORMULARIO EDITAR JUGADOR -->
+  <div *ngIf="jugadorSeleccionado" class="mt-4 border p-3 bg-warning-subtle rounded">
+    <h5>✏️ Editar jugador</h5>
+    <form (ngSubmit)="updateJugador()" #editForm="ngForm">
+      <input class="form-control mb-2" [(ngModel)]="jugadorSeleccionado.nombre" name="editNombre" placeholder="Nombre" required />
+      <input class="form-control mb-2" [(ngModel)]="jugadorSeleccionado.apellido" name="editApellido" placeholder="Apellidos" required />
+      <input class="form-control mb-2" type="number" [(ngModel)]="jugadorSeleccionado.edad" name="editEdad" placeholder="Edad" required />
+      <input class="form-control mb-2" type="number" [(ngModel)]="jugadorSeleccionado.altura" name="editAltura" placeholder="Altura" required />
+      <input class="form-control mb-2" [(ngModel)]="jugadorSeleccionado.posicion" name="editPosicion" placeholder="Posición" required />
+      <input class="form-control mb-2" [(ngModel)]="jugadorSeleccionado.equipo" name="editEquipo" placeholder="Equipo" required />
+      <input class="form-control mb-2" [(ngModel)]="jugadorSeleccionado.foto" name="editFoto" placeholder="URL de imagen" />
+      <input class="form-control mb-2" [(ngModel)]="jugadorSeleccionado.video" name="editVideo" placeholder="URL de video" />
+      <button class="btn btn-success mt-2">Guardar cambios</button>
+      <button type="button" class="btn btn-secondary mt-2 ms-2" (click)="jugadorSeleccionado = null">Cancelar</button>
+    </form>
+  </div>
 </div>
