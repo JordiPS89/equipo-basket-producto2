@@ -1,32 +1,38 @@
 <div class="container justify-content-center pb-32">
-  <h3 class = "h3-title">Lista de Jugadores</h3>
-  <div class = "container">
+  <h3 class="h3-title">Lista de Jugadores</h3>
+
+  <div class="container">
     <h4 class="buscador-title">Buscador</h4>
     <div class="row">
-      <div class = "col">
+      <div class="col">
         <input type="text" [(ngModel)]="filtroNombre" placeholder="Nombre" class="search-bar" />
       </div>
-      <div class = "col">
-      <input type="text" [(ngModel)]="filtroEdad"  placeholder="Edad" class="search-bar" />
+      <div class="col">
+        <input type="text" [(ngModel)]="filtroEdad" placeholder="Edad" class="search-bar" />
       </div>
-
-      <div class = "col">
-      <input type="text" [(ngModel)]="filtroPosicion" placeholder="Posición" class="search-bar" />
+      <div class="col">
+        <input type="text" [(ngModel)]="filtroPosicion" placeholder="Posición" class="search-bar" />
       </div>
-
     </div>
+  </div>
 
+  <!-- 🔽 Botón para añadir nuevo jugador -->
+  <div class="d-flex justify-content-end mt-3">
+    <button (click)="nuevoJugador()" class="btn btn-success">➕ Nuevo Jugador</button>
   </div>
 
   <div class="container mt-4">
     <div class="row">
       <h4 class="grid-title">Jugadores</h4>
+
       <div *ngIf="jugadores.length === 0" style="color: red;">
         ⚠️ No se encontraron jugadores en Firebase.
       </div>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let jugador of jugadores |jugadorFiltro :filtroNombre:filtroEdad:filtroPosicion">
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3"
+           *ngFor="let jugador of jugadores | jugadorFiltro:filtroNombre:filtroEdad:filtroPosicion">
         <div class="card player-card" (click)="seleccionarJugador(jugador)">
-          <div class="row g-0" >
+          <div class="row g-0">
             <div class="col-4">
               <img [src]="jugador.foto" class="img-fluid rounded-start jugador-img" [alt]="jugador.nombre">
             </div>
@@ -42,9 +48,6 @@
       </div>
     </div>
   </div>
-  
-  
-  
 
   <app-detail *ngIf="jugadorSeleccionado" [jugador]="jugadorSeleccionado"></app-detail>
 </div>

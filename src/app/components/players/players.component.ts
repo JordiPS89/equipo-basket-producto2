@@ -32,5 +32,20 @@ export class PlayersComponent implements OnInit {
   seleccionarJugador(jugador: any) {
     this.jugadorSeleccionado = jugador;
   }
-}
 
+  nuevoJugador() {
+    const jugador = {
+      nombre: 'Nuevo',
+      apellidos: 'Jugador',
+      edad: 20,
+      equipo: 'Equipo Demo',
+      posicion: 'Base',
+      foto: 'assets/jugadores/demo.jpg',
+      video: 'assets/videos/demo.mp4'
+    };
+
+    this.firebaseService.addPlayer(jugador).then(() => {
+      console.log('Jugador añadido');
+    });
+  }
+}
