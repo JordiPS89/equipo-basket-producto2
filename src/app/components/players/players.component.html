@@ -16,19 +16,49 @@
     </div>
   </div>
 
-  <!-- 🔽 Botón para añadir nuevo jugador -->
+  <!-- 🔽 Botón para mostrar formulario -->
   <div class="d-flex justify-content-end mt-3">
-    <button (click)="nuevoJugador()" class="btn btn-success">➕ Nuevo Jugador</button>
+    <button (click)="mostrarFormulario = true" class="btn btn-success">➕ Nuevo Jugador</button>
+  </div>
+
+  <!-- 🔽 Formulario para agregar jugador -->
+  <div *ngIf="mostrarFormulario" class="card p-4 mt-3">
+    <h5>Agregar nuevo jugador</h5>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <input class="form-control" [(ngModel)]="nuevo.nombre" placeholder="Nombre" />
+      </div>
+      <div class="col-md-6">
+        <input class="form-control" [(ngModel)]="nuevo.apellidos" placeholder="Apellidos" />
+      </div>
+      <div class="col-md-4">
+        <input class="form-control" [(ngModel)]="nuevo.edad" type="number" placeholder="Edad" />
+      </div>
+      <div class="col-md-4">
+        <input class="form-control" [(ngModel)]="nuevo.equipo" placeholder="Equipo" />
+      </div>
+      <div class="col-md-4">
+        <input class="form-control" [(ngModel)]="nuevo.posicion" placeholder="Posición" />
+      </div>
+      <div class="col-md-6">
+        <input class="form-control" [(ngModel)]="nuevo.foto" placeholder="URL de la foto" />
+      </div>
+      <div class="col-md-6">
+        <input class="form-control" [(ngModel)]="nuevo.video" placeholder="URL del video" />
+      </div>
+      <div class="col-12 d-flex justify-content-end gap-2">
+        <button class="btn btn-secondary" (click)="cancelarNuevo()">Cancelar</button>
+        <button class="btn btn-primary" (click)="guardarNuevoJugador()">Guardar</button>
+      </div>
+    </div>
   </div>
 
   <div class="container mt-4">
     <div class="row">
       <h4 class="grid-title">Jugadores</h4>
-
       <div *ngIf="jugadores.length === 0" style="color: red;">
         ⚠️ No se encontraron jugadores en Firebase.
       </div>
-
       <div class="col-12 col-sm-6 col-md-4 col-lg-3"
            *ngFor="let jugador of jugadores | jugadorFiltro:filtroNombre:filtroEdad:filtroPosicion">
         <div class="card player-card" (click)="seleccionarJugador(jugador)">

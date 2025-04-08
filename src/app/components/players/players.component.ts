@@ -20,6 +20,18 @@ export class PlayersComponent implements OnInit {
   jugadores: any[] = [];
   jugadorSeleccionado: any = null;
 
+  mostrarFormulario: boolean = false;
+
+  nuevo = {
+    nombre: '',
+    apellidos: '',
+    edad: null,
+    equipo: '',
+    posicion: '',
+    foto: '',
+    video: ''
+  };
+
   constructor(private readonly firebaseService: FirebaseService) {}
 
   ngOnInit(): void {
@@ -33,19 +45,28 @@ export class PlayersComponent implements OnInit {
     this.jugadorSeleccionado = jugador;
   }
 
-  nuevoJugador() {
-    const jugador = {
-      nombre: 'Nuevo',
-      apellidos: 'Jugador',
-      edad: 20,
-      equipo: 'Equipo Demo',
-      posicion: 'Base',
-      foto: 'assets/jugadores/demo.jpg',
-      video: 'assets/videos/demo.mp4'
+  cancelarNuevo() {
+    this.mostrarFormulario = false;
+    this.nuevo = {
+      nombre: '',
+      apellidos: '',
+      edad: null,
+      equipo: '',
+      posicion: '',
+      foto: '',
+      video: ''
     };
+  }
 
-    this.firebaseService.addPlayer(jugador).then(() => {
-      console.log('Jugador añadido');
+  guardarNuevoJugador() {
+    if (!this.nuevo.nombre || !this.nuevo.apellidos) {
+      alert('Nombre y apellidos son obligatorios');
+      return;
+    }
+
+    this.firebaseService.addPlayer(this.nuevo).then(() => {
+      console.log('Jugador añadido con éxito');
+      this.cancelarNuevo();
     });
   }
 }
