@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';  // Importa Firestore
-import { Observable } from 'rxjs';  // Para manejar los datos como un observable
+import { Firestore, collectionData, collection, addDoc } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
+  constructor(private firestore: Firestore) {}
 
-  constructor(private readonly firestore: AngularFirestore) { }
-
-  // Método para obtener todos los jugadores
   getPlayers(): Observable<any[]> {
-    // Obtén todos los documentos de la colección 'players'
-    return this.firestore.collection('players').valueChanges();
+    const playersRef = collection(this.firestore, 'players');
+    return collectionData(playersRef, { idField: 'id' });
   }
 
-  // Método para agregar un nuevo jugador
-  addPlayer(player: any): Promise<void> {
-    // Crea un nuevo documento en la colección 'players' con un id único
-    const id = this.firestore.createId();
-    return this.firestore.collection('players').doc(id).set(player);
+  addPlayer(player: any): Promise<any> {
+    const playersRef = collection(this.firestore, 'players');
+    return addDoc(playersRef, player);
   }
 }
+
+
