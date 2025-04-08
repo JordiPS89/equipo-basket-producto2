@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { JUGADORES } from '../../data/jugadores';
 import { JugadorFiltroPipe } from '../../pipes/jugador-filtro.pipe';
 import { DetailComponent } from '../detail/detail.component';
+import { FirebaseService } from '../../firebase.service';
 
 @Component({
   selector: 'app-players',
@@ -12,19 +12,25 @@ import { DetailComponent } from '../detail/detail.component';
   templateUrl: './players.component.html',
   styleUrls: ['./players.component.css']
 })
-export class PlayersComponent {
+export class PlayersComponent implements OnInit {
   filtroNombre: string = '';
   filtroEdad: string = '';
   filtroPosicion: string = '';
 
-  jugadores = JUGADORES;
+  jugadores: any[] = [];
   jugadorSeleccionado: any = null;
+
+  constructor(private readonly firebaseService: FirebaseService) {}
+
+  ngOnInit(): void {
+    this.firebaseService.getPlayers().subscribe(data => {
+      this.jugadores = data;
+      console.log('Jugadores desde Firebase:', data);
+    });
+  }
+
   seleccionarJugador(jugador: any) {
     this.jugadorSeleccionado = jugador;
   }
-
-
-
-
-  
 }
+
