@@ -22,6 +22,8 @@ export class PlayersComponent implements OnInit {
 
   mostrarFormulario: boolean = false;
 
+  posiciones: string[] = ['Alero', 'Base', 'Ala-Pívot', 'Pívot', 'Escolta'];
+
   nuevo = {
     nombre: '',
     apellidos: '',

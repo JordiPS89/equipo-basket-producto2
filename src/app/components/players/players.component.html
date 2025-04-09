@@ -1,6 +1,7 @@
 <div class="container justify-content-center pb-32">
   <h3 class="h3-title">Lista de Jugadores</h3>
 
+  <!-- 🔍 FILTROS -->
   <div class="container">
     <h4 class="buscador-title">Buscador</h4>
     <div class="row">
@@ -11,15 +12,20 @@
         <input type="text" [(ngModel)]="filtroEdad" placeholder="Edad" class="search-bar" />
       </div>
       <div class="col">
-        <input type="text" [(ngModel)]="filtroPosicion" placeholder="Posición" class="search-bar" />
+        <select [(ngModel)]="filtroPosicion" class="form-select">
+          <option value="">Todas las posiciones</option>
+          <option *ngFor="let pos of posiciones" [value]="pos">{{ pos }}</option>
+        </select>
       </div>
     </div>
   </div>
 
+  <!-- ➕ BOTÓN NUEVO -->
   <div class="d-flex justify-content-end mt-3">
     <button (click)="mostrarFormulario = true" class="btn btn-success">➕ Nuevo Jugador</button>
   </div>
 
+  <!-- 📋 FORMULARIO NUEVO JUGADOR -->
   <div *ngIf="mostrarFormulario" class="card p-4 mt-3">
     <h5>Agregar nuevo jugador</h5>
     <div class="row g-3">
@@ -39,7 +45,10 @@
         <input class="form-control" [(ngModel)]="nuevo.equipo" placeholder="Equipo" />
       </div>
       <div class="col-md-4">
-        <input class="form-control" [(ngModel)]="nuevo.posicion" placeholder="Posición" />
+        <select class="form-select" [(ngModel)]="nuevo.posicion">
+          <option value="">Selecciona posición</option>
+          <option *ngFor="let pos of posiciones" [value]="pos">{{ pos }}</option>
+        </select>
       </div>
       <div class="col-md-6">
         <input class="form-control" [(ngModel)]="nuevo.foto" placeholder="URL de la foto" />
@@ -54,6 +63,7 @@
     </div>
   </div>
 
+  <!-- 📋 LISTA DE JUGADORES -->
   <div class="container mt-4">
     <div class="row">
       <h4 class="grid-title">Jugadores</h4>
@@ -62,21 +72,16 @@
       </div>
       <div class="col-12 col-sm-6 col-md-4 col-lg-3"
            *ngFor="let jugador of jugadores | jugadorFiltro:filtroNombre:filtroEdad:filtroPosicion">
-        <div class="card player-card">
+        <div class="card player-card" (click)="seleccionarJugador(jugador)">
           <div class="row g-0">
             <div class="col-4">
               <img [src]="jugador.foto" class="img-fluid rounded-start jugador-img" [alt]="jugador.nombre">
             </div>
             <div class="col-8">
               <div class="card-body">
-                <div class="d-flex justify-content-between align-items-start">
-                  <div (click)="seleccionarJugador(jugador)" style="cursor: pointer;">
-                    <h6 class="card-title">{{ jugador.nombre }} {{ jugador.apellidos }}</h6>
-                    <p class="card-text"><strong>Equipo:</strong> {{ jugador.equipo }}</p>
-                    <p class="card-text"><strong>Posición:</strong> {{ jugador.posicion }}</p>
-                  </div>
-                  <button class="btn btn-sm btn-outline-danger" (click)="borrarJugador(jugador, $event)">🗑️</button>
-                </div>
+                <h6 class="card-title">{{ jugador.nombre }} {{ jugador.apellidos }}</h6>
+                <p class="card-text"><strong>Equipo:</strong> {{ jugador.equipo }}</p>
+                <p class="card-text"><strong>Posición:</strong> {{ jugador.posicion }}</p>
               </div>
             </div>
           </div>
@@ -85,5 +90,7 @@
     </div>
   </div>
 
+  <!-- 🔍 DETALLE -->
   <app-detail *ngIf="jugadorSeleccionado" [jugador]="jugadorSeleccionado"></app-detail>
 </div>
+

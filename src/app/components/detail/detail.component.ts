@@ -15,6 +15,8 @@ export class DetailComponent {
   @Input() jugador: any;
   modoEdicion: boolean = false;
 
+  posiciones: string[] = ['Alero', 'Base', 'Ala-Pívot', 'Pívot', 'Escolta'];
+
   constructor(private firebaseService: FirebaseService) {}
 
   cerrarModal() {

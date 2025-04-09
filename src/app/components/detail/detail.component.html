@@ -18,7 +18,14 @@
           <input class="form-control mb-2" [readonly]="!modoEdicion" [(ngModel)]="jugador.nombre" placeholder="Nombre" />
           <input class="form-control mb-2" [readonly]="!modoEdicion" [(ngModel)]="jugador.apellidos" placeholder="Apellidos" />
           <input class="form-control mb-2" [readonly]="!modoEdicion" [(ngModel)]="jugador.equipo" placeholder="Equipo" />
-          <input class="form-control mb-2" [readonly]="!modoEdicion" [(ngModel)]="jugador.posicion" placeholder="Posición" />
+          <!-- ✅ Mostrar dropdown si estamos en modo edición -->
+          <select *ngIf="modoEdicion" class="form-select mb-2" [(ngModel)]="jugador.posicion">
+            <option *ngFor="let pos of posiciones" [value]="pos">{{ pos }}</option>
+          </select>
+
+          <!-- ✅ Mostrar solo texto si NO estamos editando -->
+          <input *ngIf="!modoEdicion" class="form-control mb-2" [readonly]="true" [value]="jugador.posicion" />
+
           <input class="form-control mb-2" type="number" [readonly]="!modoEdicion" [(ngModel)]="jugador.edad" placeholder="Edad" />
           <input class="form-control mb-2" [readonly]="!modoEdicion" [(ngModel)]="jugador.altura" placeholder="Altura" />
           <input class="form-control mb-2" [readonly]="!modoEdicion" [(ngModel)]="jugador.foto" placeholder="URL de la foto" />
