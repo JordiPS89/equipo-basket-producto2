@@ -43,8 +43,13 @@ export class PlayersComponent implements OnInit {
   }
 
   seleccionarJugador(jugador: any) {
-    this.jugadorSeleccionado = jugador;
-  }
+    this.jugadorSeleccionado = null;
+  
+    // Esto obliga a Angular a destruir el componente <app-detail> y luego crearlo de nuevo
+    setTimeout(() => {
+      this.jugadorSeleccionado = jugador;
+    }, 0);
+  }  
 
   cancelarNuevo() {
     this.mostrarFormulario = false;
