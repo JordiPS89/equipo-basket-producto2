@@ -54,5 +54,60 @@ export const JUGADORES = [
     equipo: 'Denver Nuggets',
     foto: 'assets/jugadores/jokic.jpg',
     video: 'assets/videos/jokic.mp4'
-  }
+  },
+  {
+    id: 6,
+    nombre: 'Kawhi',
+    apellidos: 'Leonard',
+    posicion: 'Alero',
+    edad: 32,
+    altura: '2.01m',
+    equipo: 'Los Angeles Clippers',
+    foto: 'assets/jugadores/kawhi.jpg',
+    video: 'assets/videos/kawhi.mp4'
+  },
+  {
+    id: 7,
+    nombre: 'James',
+    apellidos: 'Harden',
+    posicion: 'Escolta',
+    edad: 34,
+    altura: '1.96m',
+    equipo: 'Philadelphia 76ers',
+    foto: 'assets/jugadores/harden.jpg',
+    video: 'assets/videos/harden.mp4'
+  },
+  {
+    id: 8,
+    nombre: 'Luka',
+    apellidos: 'Dončić',
+    posicion: 'Base',
+    edad: 24,
+    altura: '2.01m',
+    equipo: 'Dallas Mavericks',
+    foto: 'assets/jugadores/luka.jpg',
+    video: 'assets/videos/luka.mp4'
+  },
+  {
+    id: 9,
+    nombre: 'Joel',
+    apellidos: 'Embiid',
+    posicion: 'Pívot',
+    edad: 29,
+    altura: '2.13m',
+    equipo: 'Philadelphia 76ers',
+    foto: 'assets/jugadores/embiid.jpg',
+    video: 'assets/videos/embiid.mp4'
+  },
+  {
+    id: 10,
+    nombre: 'Jayson',
+    apellidos: 'Tatum',
+    posicion: 'Alero',
+    edad: 25,
+    altura: '2.06m',
+    equipo: 'Boston Celtics',
+    foto: 'assets/jugadores/tatum.jpg',
+    video: 'assets/videos/tatum.mp4'
+  }  
 ];

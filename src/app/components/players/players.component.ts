@@ -1,76 +1,92 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SafeUrlPipe } from '../../pipes/safe-url.pipe';
-import { PlayerService } from '../../services/player.service';
-import { Player } from '../../models/player.model';
+import { JugadorFiltroPipe } from '../../pipes/jugador-filtro.pipe';
+import { DetailComponent } from '../detail/detail.component';
+import { FirebaseService } from '../../firebase.service';
 
 @Component({
   selector: 'app-players',
   standalone: true,
-  imports: [CommonModule, FormsModule, SafeUrlPipe],
+  imports: [CommonModule, DetailComponent, FormsModule, JugadorFiltroPipe],
   templateUrl: './players.component.html',
   styleUrls: ['./players.component.css']
 })
 export class PlayersComponent implements OnInit {
-  players: Player[] = [];
-  nuevoJugador: Partial<Player> = {};
-  jugadorSeleccionado: Player | null = null;
+  filtroNombre: string = '';
+  filtroEdad: string = '';
+  filtroPosicion: string = '';
 
-  constructor(private playerService: PlayerService) {}
-  
+  jugadores: any[] = [];
+  jugadorSeleccionado: any = null;
+
+  mostrarFormulario: boolean = false;
+
+  posiciones: string[] = ['Alero', 'Base', 'Ala-Pívot', 'Pívot', 'Escolta'];
+
+  nuevo = {
+    nombre: '',
+    apellidos: '',
+    edad: null,
+    altura: '',
+    equipo: '',
+    posicion: '',
+    foto: '',
+    video: ''
+  };
+
+  constructor(private readonly firebaseService: FirebaseService) {}
+
   ngOnInit(): void {
-    this.playerService.getPlayers().subscribe((data: any[]) => {
-      console.log('Jugadores recibidos:', data);
-      this.players = data;
+    this.firebaseService.getPlayers().subscribe(data => {
+      this.jugadores = data;
+      console.log('Jugadores desde Firebase:', data);
     });
   }
+
+  seleccionarJugador(jugador: any) {
+    this.jugadorSeleccionado = null;
   
+    // Esto obliga a Angular a destruir el componente <app-detail> y luego crearlo de nuevo
+    setTimeout(() => {
+      this.jugadorSeleccionado = jugador;
+    }, 0);
+  }  
 
-  addPlayer(): void {
-    if (!this.nuevoJugador.nombre || !this.nuevoJugador.apellido) return;
-
-    const id = this.generateId();
-    const player: Player = {
-      id,
-      nombre: this.nuevoJugador.nombre,
-      apellido: this.nuevoJugador.apellido,
-      edad: this.nuevoJugador.edad || 0,
-      altura: this.nuevoJugador.altura || 0,
-      posicion: this.nuevoJugador.posicion || '',
-      equipo: this.nuevoJugador.equipo || '',
-      foto: this.nuevoJugador.foto || '',
-      video: this.nuevoJugador.video || ''
+  cancelarNuevo() {
+    this.mostrarFormulario = false;
+    this.nuevo = {
+      nombre: '',
+      apellidos: '',
+      edad: null,
+      altura: '',
+      equipo: '',
+      posicion: '',
+      foto: '',
+      video: ''
     };
-
-    this.playerService.addPlayer(id, player).then(() => {
-      this.nuevoJugador = {};
-    });
   }
 
-  eliminarJugador(id: string | undefined): void {
-    if (!id) return;
-    this.playerService.deletePlayer(id).then(() => {
-      console.log(`Jugador eliminado: ${id}`);
-    });
-  }
-
-  seleccionarJugador(player: Player): void {
-    this.jugadorSeleccionado = { ...player };
-  }
-
-  updateJugador(): void {
-    if (this.jugadorSeleccionado?.id) {
-      this.playerService
-        .updatePlayer(this.jugadorSeleccionado.id, this.jugadorSeleccionado)
-        .then(() => {
-          console.log('Jugador actualizado');
-          this.jugadorSeleccionado = null;
-        });
+  guardarNuevoJugador() {
+    if (!this.nuevo.nombre || !this.nuevo.apellidos) {
+      alert('Nombre y apellidos son obligatorios');
+      return;
     }
+
+    this.firebaseService.addPlayer(this.nuevo).then(() => {
+      console.log('Jugador añadido con éxito');
+      this.cancelarNuevo();
+    });
   }
 
-  private generateId(): string {
-    return Math.random().toString(36).substring(2, 10);
+  borrarJugador(jugador: any, event: Event) {
+    event.stopPropagation(); // prevenir selección
+
+    const confirmacion = confirm(`¿Eliminar a ${jugador.nombre} ${jugador.apellidos}?`);
+    if (confirmacion && jugador.id) {
+      this.firebaseService.deletePlayer(jugador.id)
+        .then(() => console.log('Jugador eliminado'))
+        .catch(err => console.error('Error al eliminar:', err));
+    }
   }
 }

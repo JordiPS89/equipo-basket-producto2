@@ -1,7 +1,11 @@
-<div *ngIf="videoUrl" class="media-container mt-3">
-    <video width="100%" height="auto" controls>
-      <source [src]="videoUrl" type="video/mp4" />
-      Tu navegador no soporta la reproducción de vídeo.
-    </video>
-  </div>
-  
+<div *ngIf="isYoutube; else localVideo">
+  <iframe [src]="embedUrl | safe" width="100%" height="315" frameborder="0"
+          allowfullscreen></iframe>
+</div>
+
+<ng-template #localVideo>
+  <video width="100%" height="auto" controls>
+    <source [src]="videoUrl" type="video/mp4" />
+    Tu navegador no soporta el video.
+  </video>
+</ng-template>

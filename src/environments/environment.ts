@@ -1,11 +1,12 @@
 export const environment = {
-  production: false,
-  firebaseConfig: {
-    apiKey: "AIzaSyD1_GoqHRDK5_OgewveJjqfFQwGEhpY8U",
-    authDomain: "equipo-basket-producto2-addf2.firebaseapp.com",
-    projectId: "equipo-basket-producto2-addf2",           // <-- ¡con 2 F!
-    storageBucket: "equipo-basket-producto2-addf2.appspot.com",
-    messagingSenderId: "272733081293",
-    appId: "1:272733081293:web:a1328cba02393fc6be2384"
-  }
-};
+    production: false,
+    firebaseConfig: {
+      apiKey: "AzasYAirSTeyTL-sUgzyzLhAxDnarXyn_M4wg",
+      authDomain: "equipo-basketuoc.firebaseapp.com",
+      projectId: "equipobasketuoc",
+      storageBucket: "equipobasketuoc.firebasestorage.app",
+      messagingSenderId: "104990418626",
+      appId: "1:104990418626:web:8fcc96952ac603f1637d5b"
+    }
+  };
+  

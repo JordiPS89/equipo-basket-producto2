@@ -10,15 +10,18 @@ export class JugadorFiltroPipe implements PipeTransform {
       return jugadores;
     }
     let resultados = jugadores;
-    if(filtroName != ''){
-      filtroName = filtroName.toLowerCase();
-      resultados= resultados.filter(jugador =>
-        jugador.nombre.toLowerCase().includes(filtroName));
+    if (filtroName.trim() !== '') {
+      const filtro = filtroName.toLowerCase();
+      resultados = resultados.filter(jugador =>
+        jugador.nombre.toLowerCase().includes(filtro) ||
+        jugador.apellidos.toLowerCase().includes(filtro)
+      );
     }
-    if(filtroEdad != ''){
-      filtroEdad = filtroEdad.toLowerCase();
-      resultados= resultados.filter(jugador =>
-        jugador.edad.toString().includes(filtroEdad));
+    if (filtroEdad.trim() !== '') {
+      const edadNumero = parseInt(filtroEdad, 10);
+      resultados = resultados.filter(jugador =>
+        jugador.edad === edadNumero
+      );
     }
     if(filtroPosicion != ''){
       filtroPosicion = filtroPosicion.toLowerCase();
