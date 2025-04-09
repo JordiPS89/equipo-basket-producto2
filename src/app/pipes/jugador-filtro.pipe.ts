@@ -15,10 +15,11 @@ export class JugadorFiltroPipe implements PipeTransform {
       resultados= resultados.filter(jugador =>
         jugador.nombre.toLowerCase().includes(filtroName));
     }
-    if(filtroEdad != ''){
-      filtroEdad = filtroEdad.toLowerCase();
-      resultados= resultados.filter(jugador =>
-        jugador.edad.toString().includes(filtroEdad));
+    if (filtroEdad.trim() !== '') {
+      const edadNumero = parseInt(filtroEdad, 10);
+      resultados = resultados.filter(jugador =>
+        jugador.edad === edadNumero
+      );
     }
     if(filtroPosicion != ''){
       filtroPosicion = filtroPosicion.toLowerCase();
