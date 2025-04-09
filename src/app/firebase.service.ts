@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collectionData, collection, addDoc, doc, deleteDoc } from '@angular/fire/firestore';
+import { Firestore, collectionData, collection, addDoc, doc, deleteDoc, updateDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -21,6 +21,11 @@ export class FirebaseService {
   deletePlayer(id: string): Promise<void> {
     const docRef = doc(this.firestore, `players/${id}`);
     return deleteDoc(docRef);
+  }
+
+  updatePlayer(id: string, datos: any): Promise<void> {
+    const docRef = doc(this.firestore, `players/${id}`);
+    return updateDoc(docRef, datos);
   }
 }
 
