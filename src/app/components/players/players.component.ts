@@ -71,4 +71,15 @@ export class PlayersComponent implements OnInit {
       this.cancelarNuevo();
     });
   }
+
+  borrarJugador(jugador: any, event: Event) {
+    event.stopPropagation(); // prevenir selección
+
+    const confirmacion = confirm(`¿Eliminar a ${jugador.nombre} ${jugador.apellidos}?`);
+    if (confirmacion && jugador.id) {
+      this.firebaseService.deletePlayer(jugador.id)
+        .then(() => console.log('Jugador eliminado'))
+        .catch(err => console.error('Error al eliminar:', err));
+    }
+  }
 }

@@ -16,12 +16,10 @@
     </div>
   </div>
 
-  <!-- 🔽 Botón para mostrar formulario -->
   <div class="d-flex justify-content-end mt-3">
     <button (click)="mostrarFormulario = true" class="btn btn-success">➕ Nuevo Jugador</button>
   </div>
 
-  <!-- 🔽 Formulario para agregar jugador -->
   <div *ngIf="mostrarFormulario" class="card p-4 mt-3">
     <h5>Agregar nuevo jugador</h5>
     <div class="row g-3">
@@ -64,16 +62,21 @@
       </div>
       <div class="col-12 col-sm-6 col-md-4 col-lg-3"
            *ngFor="let jugador of jugadores | jugadorFiltro:filtroNombre:filtroEdad:filtroPosicion">
-        <div class="card player-card" (click)="seleccionarJugador(jugador)">
+        <div class="card player-card">
           <div class="row g-0">
             <div class="col-4">
               <img [src]="jugador.foto" class="img-fluid rounded-start jugador-img" [alt]="jugador.nombre">
             </div>
             <div class="col-8">
               <div class="card-body">
-                <h6 class="card-title">{{ jugador.nombre }} {{ jugador.apellidos }}</h6>
-                <p class="card-text"><strong>Equipo:</strong> {{ jugador.equipo }}</p>
-                <p class="card-text"><strong>Posición:</strong> {{ jugador.posicion }}</p>
+                <div class="d-flex justify-content-between align-items-start">
+                  <div (click)="seleccionarJugador(jugador)" style="cursor: pointer;">
+                    <h6 class="card-title">{{ jugador.nombre }} {{ jugador.apellidos }}</h6>
+                    <p class="card-text"><strong>Equipo:</strong> {{ jugador.equipo }}</p>
+                    <p class="card-text"><strong>Posición:</strong> {{ jugador.posicion }}</p>
+                  </div>
+                  <button class="btn btn-sm btn-outline-danger" (click)="borrarJugador(jugador, $event)">🗑️</button>
+                </div>
               </div>
             </div>
           </div>
